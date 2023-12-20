@@ -20,8 +20,13 @@ window.speechSynthesis.onvoiceschanged = () => {
     speech.voice = voices[0];
 };
 
+// Update the selected voice when the user changes the dropdown selection
+voiceSelect.addEventListener('change', () => {
+    let selectedVoice = voiceSelect.selectedOptions[0].getAttribute('data-name');
+    speech.voice = voices.find(voice => voice.name === selectedVoice);
+});
 
 document.querySelector('button').addEventListener('click', () => {
     speech.text = document.querySelector('textarea').value;
     window.speechSynthesis.speak(speech);
-})
+});
